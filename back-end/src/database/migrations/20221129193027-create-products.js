@@ -6,27 +6,23 @@ module.exports = {
   * @param {import('sequelize').Sequelize} Sequelize 
   */
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('salesProducts', {
-      sale_id: {
+    await queryInterface.createTable('products', {
+      id: {
         primaryKey: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'sales',
-          key: 'id',
-        },
       },
-      product_id: {
-        primaryKey: true,
-        type: Sequelize.INTEGER,
+      name: {
+        type: Sequelize.STRING(100),
         allowNull: false,
-        references: {
-          model: 'products',
-          key: 'id',
-        },
       },
-      quantity: {
-        type: Sequelize.INTEGER,
+      price: {
+        type: Sequelize.DECIMAL(4, 2),
+        allowNull: false,
+      },
+      url_image: {
+        type: Sequelize.STRING(200),
         allowNull: false,
       },
     }, {
@@ -36,6 +32,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('salesProducts');
-  },
+    await queryInterface.dropTable('products');
+  }
 };
